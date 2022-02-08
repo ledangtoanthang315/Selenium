@@ -60,8 +60,10 @@ public class TestPlan {
         webForm.inputOrdersQuantity();
         webForm.clickMarkAsDoneButton();
         webForm.clickSaveButton();
+        webForm.verifyStatusDone();
 
         // 8. Validate the new Manufacturing Order
+        webForm.verifyOrdersDone();
 
     }
 

@@ -2,11 +2,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Objects;
+
 public class WebForm extends PageObject{
 
     private final String EMAIL = "user@aspireapp.com";
     private final String PASSWORD = "@sp1r3app";
-    private final String PRODUCT_NAME = "020815p";
+    private final String PRODUCT_NAME = "020819p";
     private final String COUNTED_QUANTITY = "11";
     private final String ORDERS_QUANTITY = "1";
 
@@ -20,7 +22,7 @@ public class WebForm extends PageObject{
     private WebElement login_button;
 
     @FindBy(xpath = "//span[contains(text(),'User')]")
-    private WebElement loginSuccess;
+    private WebElement login_Success;
 
     @FindBy(xpath = "//div[contains(text(),'Inventory')]")
     private WebElement inventory_link;
@@ -36,6 +38,10 @@ public class WebForm extends PageObject{
 
     @FindBy(xpath = "//a[contains(text(),'Add a line')]")
     private WebElement add_a_line_link;
+
+    //    @FindBy(xpath = "//button[@name='action_update_quantity_on_hand']")
+    @FindBy(xpath = "//span[contains(text(),'Update Quantity')]")
+    private WebElement update_quantity_button;
 
     @FindBy(xpath = "//button[contains(text(),'Create')]")
     private WebElement create_button;
@@ -58,18 +64,20 @@ public class WebForm extends PageObject{
     @FindBy(xpath = "//input[@name='qty_producing']")
     private WebElement orders_quantity;
 
-    @FindBy(xpath = "//input[@class='o_input ui-autocomplete-input' and @id='o_field_input_744']")
+    @FindBy(xpath = "//div[@name='product_id']//descendant-or-self::div/input")
     private WebElement products_orders;
+
+    @FindBy(xpath = "//div[@name='product_id']//descendant-or-self::div/input")
+    private WebElement products_orders_done;
 
     @FindBy(xpath = "//input[@class='o_input ui-autocomplete-input']")
     private WebElement products_consumed;
 
-//    @FindBy(xpath = "//button[@name='action_update_quantity_on_hand']")
-    @FindBy(xpath = "//span[contains(text(),'Update Quantity')]")
-    private WebElement update_quantity_button;
-
     @FindBy(xpath = "/html/body/header/nav/a[1]")
     private WebElement application_icon;
+
+    @FindBy(xpath = "//div[@name='state']//descendant-or-self::button[@title='Current state' and contains(text(),'Done')]")
+    private WebElement status_done;
 
     public WebForm(WebDriver driver) {
         super(driver);
@@ -152,7 +160,17 @@ public class WebForm extends PageObject{
     }
 
     public void verifyLoginSuccess(){
-        this.loginSuccess.isDisplayed();
+        this.login_Success.isDisplayed();
+    }
+
+    public void verifyStatusDone(){
+        this.status_done.isDisplayed();
+    }
+
+    public void verifyOrdersDone(){
+        if(Objects.equals(this.products_orders_done.getText(),PRODUCT_NAME)) {
+            System.out.println("The new Manufacturing Order is created with corrected information!");
+        } else System.out.println("The new Manufacturing Order is NOT created with corrected information!!!!!!");
     }
 
 }
