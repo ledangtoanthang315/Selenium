@@ -8,7 +8,7 @@ public class WebForm extends PageObject{
 
     private final String EMAIL = "user@aspireapp.com";
     private final String PASSWORD = "@sp1r3app";
-    private final String PRODUCT_NAME = "020819p";
+    private final String PRODUCT_NAME = "020909p";
     private final String COUNTED_QUANTITY = "11";
     private final String ORDERS_QUANTITY = "1";
 
@@ -36,10 +36,9 @@ public class WebForm extends PageObject{
     @FindBy(xpath = "//a[contains(text(),'Products')]")
     private WebElement products_link;
 
-    @FindBy(xpath = "//a[contains(text(),'Add a line')]")
+    @FindBy(xpath = "//div[@class='tab-content']/div[1]//*[text()='Add a line']")
     private WebElement add_a_line_link;
 
-    //    @FindBy(xpath = "//button[@name='action_update_quantity_on_hand']")
     @FindBy(xpath = "//span[contains(text(),'Update Quantity')]")
     private WebElement update_quantity_button;
 
@@ -56,22 +55,22 @@ public class WebForm extends PageObject{
     private WebElement mark_as_done_button;
 
     @FindBy(xpath = "//input[@name='name']")
-    private WebElement product_name;
+    private WebElement product_name_txt;
 
     @FindBy(xpath = "//input[@name='inventory_quantity']")
-    private WebElement counted_quantity;
+    private WebElement counted_quantity_txt;
 
     @FindBy(xpath = "//input[@name='qty_producing']")
-    private WebElement orders_quantity;
+    private WebElement orders_quantity_txt;
 
     @FindBy(xpath = "//div[@name='product_id']//descendant-or-self::div/input")
-    private WebElement products_orders;
+    private WebElement products_orders_txt;
 
-    @FindBy(xpath = "//div[@name='product_id']//descendant-or-self::div/input")
+    @FindBy(xpath = "//div[@class='tab-content']/div[1]//*[@name='product_id']")
     private WebElement products_orders_done;
 
-    @FindBy(xpath = "//input[@class='o_input ui-autocomplete-input']")
-    private WebElement products_consumed;
+    @FindBy(xpath = "//div[@class='tab-content']//div[@name='product_id']//descendant-or-self::div/input")
+    private WebElement products_consumed_txt;
 
     @FindBy(xpath = "/html/body/header/nav/a[1]")
     private WebElement application_icon;
@@ -92,23 +91,23 @@ public class WebForm extends PageObject{
     }
 
     public void inputProductName(){
-        this.product_name.sendKeys(PRODUCT_NAME);
+        this.product_name_txt.sendKeys(PRODUCT_NAME);
     }
 
     public void inputCountedQuantity(){
-        this.counted_quantity.sendKeys(COUNTED_QUANTITY);
+        this.counted_quantity_txt.sendKeys(COUNTED_QUANTITY);
     }
 
     public void inputOrdersQuantity(){
-        this.products_consumed.sendKeys(ORDERS_QUANTITY);
+        this.products_consumed_txt.sendKeys(ORDERS_QUANTITY);
     }
 
     public void inputProductsOrders(){
-        this.products_orders.sendKeys(PRODUCT_NAME);
+        this.products_orders_txt.sendKeys(PRODUCT_NAME);
     }
 
     public void inputProductsConsumed(){
-        this.products_consumed.sendKeys(PRODUCT_NAME);
+        this.products_consumed_txt.sendKeys(PRODUCT_NAME);
     }
 
     public void clickLoginButton(){
@@ -151,9 +150,7 @@ public class WebForm extends PageObject{
         this.mark_as_done_button.click();
     }
 
-    public void clickUpdateQuantity(){
-        this.update_quantity_button.click();
-    }
+    public void clickUpdateQuantity() {this.update_quantity_button.click(); }
 
     public void clickApplicationIcon(){
         this.application_icon.click();
