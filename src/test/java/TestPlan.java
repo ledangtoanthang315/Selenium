@@ -69,7 +69,7 @@ public class TestPlan {
 
     @AfterSuite
     public static void cleanUp(){
-//        driver.manage().deleteAllCookies();
-//        driver.close();
+        driver.manage().deleteAllCookies();
+        driver.close();
     }
 }
